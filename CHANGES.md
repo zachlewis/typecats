@@ -1,4 +1,9 @@
-### 1.7.0
+## 1.8.0
+
+- Supports Python 3.8 and 3.9.
+- Upgrades `cattrs` from 1.1.2 to 1.8.0.
+
+## 1.7.0
 
 - Upgrades `cattrs` from 1.0.0 to 1.1.2 and `attrs` from 19.1.0 to 20.3.0,
   primarily to fix a `cattrs` bug wherein union field types where types in the

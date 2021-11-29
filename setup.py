@@ -22,7 +22,7 @@ setup(
     package_data={"": ["py.typed"]},
     python_requires=">=3.7",
     install_requires=[
-        "attrs == 20.3.0",
+        "attrs == 21.2.0",
         "cattrs == 1.9.0",
         "typing_extensions >= 3.7;python_version<'3.8'",
     ],

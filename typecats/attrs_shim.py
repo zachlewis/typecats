@@ -6,21 +6,24 @@ Current attrs version supported is 20.3.0
 # pylint: disable=redefined-builtin
 import typing as ty
 from decimal import Decimal
+import sys
 
 from attr._make import (
     NOTHING,
     _ClassBuilder,
-    _determine_eq_order,
+    _determine_attrs_eq_order,
     _determine_whether_to_implement,
     _has_frozen_base_class,
     _has_own_attribute
 )
+
 from attr.exceptions import PythonTooOldError
 from attr._compat import PY2
 
 
 _SCALAR_TYPES_WITH_NO_EMPTY_VALUES = (bool, float, int, Decimal)
 
+PY310 = sys.version_info[:2] >= (3, 10)
 
 def cat_attrs(
     maybe_cls=None,
@@ -46,6 +49,7 @@ def cat_attrs(
     getstate_setstate=None,
     on_setattr=None,
     field_transformer=None,
+    match_args=True,
 ):
     """Copied from attrs._make in attrs 20.3.0 in order to allow dynamic adding of validators!
     https://github.com/python-attrs/attrs/blob/20.3.0/src/attr/_make.py#L1013
@@ -57,7 +61,7 @@ def cat_attrs(
             "auto_detect only works on Python 3 and later."
         )
 
-    eq_, order_ = _determine_eq_order(cmp, eq, order, None)
+    eq_, order_ = _determine_attrs_eq_order(cmp, eq, order, None)
     hash_ = hash  # work around the lack of nonlocal
 
     if isinstance(on_setattr, (list, tuple)):
@@ -168,7 +172,14 @@ def cat_attrs(
                     "Invalid value for cache_hash.  To use hash caching,"
                     " init must be True."
                 )
-
+        
+        if (
+            PY310
+            and match_args
+            and not _has_own_attribute(cls, "__match_args__")
+        ):
+            builder.add_match_args()
+        
         return builder.build_class()
 
     # maybe_cls's type depends on the usage of the decorator.  It's a class

@@ -1,10 +1,15 @@
 # 2.0.0
 
 - Upgrades `attrs` from 20.3.0 to 21.1.0
+- Supports Python 3.8 and 3.9.
 - Upgrades `cattrs` from 1.1.2 to 1.9.0 and switches to the
   GenConverter, which supports the newer style type annotations.
   Because the new converters are opted into and actually required, this
   is a breaking change.
+
+## 1.7.1
+
+- Correctly reference typing_extensions as a dependency in setup.py
 
 ## 1.7.0
 

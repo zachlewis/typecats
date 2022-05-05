@@ -7,8 +7,8 @@ instead of typing.List[int].
 from functools import partial
 
 from attr import has as is_attrs_class
-from cattr.converters import Converter
-from cattr._compat import has_with_generic
+from cattrs.converters import Converter
+from cattrs._compat import has_with_generic
 
 from .wildcat import is_wildcat, enrich_structured_wildcat, enrich_unstructured_wildcat
 from .strip_defaults import ShouldStripDefaults, strip_attrs_defaults

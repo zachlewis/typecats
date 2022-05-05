@@ -22,8 +22,8 @@ setup(
     package_data={"": ["py.typed"]},
     python_requires=">=3.7",
     install_requires=[
-        "attrs == 21.2.0",
-        "cattrs == 1.9.0",
+        "attrs >= 21.4.0",
+        "cattrs >= 22.1.0",
         "typing_extensions >= 3.7;python_version<'3.8'",
     ],
     # it is important to keep these install_requires basically in sync with the Pipfile as well.
